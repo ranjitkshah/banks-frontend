@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import { throttle } from "lodash";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Paper from "@material-ui/core/Paper";
@@ -115,7 +114,7 @@ export default function TableData() {
     setPage(0);
   };
   const handleFavouritesBank = (e) => {
-    if(value[e.target.name]==undefined){
+    if(value[e.target.name]===undefined){
         value[e.target.name]=true
     }
     else{
