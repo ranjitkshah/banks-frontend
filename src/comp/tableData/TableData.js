@@ -126,19 +126,15 @@ export default function TableData() {
             return obj.ifsc === e.target.name
         })
         console.log(favrows)
-        if (fav.includes(favrows[0])) {
-            console.log('ok')
-            console.log(favrows[0].ifsc)
+        if (fav.some(obj=>obj.ifsc===favrows[0].ifsc)) {          
             fav=fav.filter(obj => {
                 return obj.ifsc !== favrows[0].ifsc;
             })
         }
         else {
-            console.log('not-ok')
             fav.push(favrows[0])
         }
         localStorage.setItem('favourites', JSON.stringify(fav))
-        console.log(fav)
     }
 
 
