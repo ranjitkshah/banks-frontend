@@ -121,18 +121,18 @@ export default function TableData() {
     };
 
 
-    const handleFavouritesBank = (e) => {     
+    const handleFavouritesBank = (e) => {
         let favrows = rows.filter(obj => {
             return obj.ifsc === e.target.name
         })
-        console.log(favrows)
-        if (fav.some(obj=>obj.ifsc===favrows[0].ifsc)) {          
-            fav=fav.filter(obj => {
+        if (fav.some(obj => obj.ifsc === favrows[0].ifsc)) {
+            fav = fav.filter(obj => {
                 return obj.ifsc !== favrows[0].ifsc;
             })
         }
         else {
             fav.push(favrows[0])
+
         }
         localStorage.setItem('favourites', JSON.stringify(fav))
     }
@@ -174,7 +174,7 @@ export default function TableData() {
 
     // }
     const showfavouritedBank = () => {
-        
+
         let favouritesbank = localStorage.getItem("favourites")
         setrows(JSON.parse(favouritesbank))
     }
@@ -199,8 +199,14 @@ export default function TableData() {
                         </MenuItem>
                     ))}
                 </TextField>
-                <Button variant="contained" color="primary" onClick={showfavouritedBank}>
-                    Favourites bank
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    classname={classes.button}
+                    onClick={showfavouritedBank}
+                    endIcon={<Favorite/>}
+                >
+                    favourites
                 </Button>
                 <TextField id="standard-basic" onChange={handleSearch} label="Search" />
 
@@ -238,7 +244,7 @@ export default function TableData() {
                                         <FormControlLabel
                                             control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />}
                                             onChange={handleFavouritesBank}
-                                            key={index}
+                                            key={row["ifsc"]}
                                             name={row["ifsc"]}
                                         />
                                     </TableCell>
@@ -279,9 +285,13 @@ const useStyles = makeStyles({
     searchBar: {
         display: 'flex',
         justifyContent: 'space-between',
-        padding: 20
+        padding: 20,
+        alignItems: 'baseline'
     },
     head: {
         fontWeight: 'bold',
+    },
+    button: {
+        height: 36
     }
 })
